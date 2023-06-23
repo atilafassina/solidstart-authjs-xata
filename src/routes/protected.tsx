@@ -10,6 +10,9 @@ import {
 import { authOptions } from "~/server/auth";
 import { getXataClient } from "~/xata.codegen";
 import { nanoid } from "nanoid";
+import { Session } from "@auth/core/types";
+
+type ExtendedSession = Session & { userId: string };
 
 export const purchaseAction = async (
   formData: FormData,
@@ -17,28 +20,14 @@ export const purchaseAction = async (
 ) => {
   const xata = getXataClient();
 
-  const session = await getSession(request, authOptions);
+  const session = (await getSession(request, authOptions)) as ExtendedSession;
   const { book } = Object.fromEntries(formData.entries()) as Record<
     "book",
     string
   >;
-  // check if user already bought before
-  let user = await xata.db.clients
-    .filter({
-      username: session?.user?.email,
-    })
-    .getFirst();
-
-  if (!user) {
-    // no user was found, `user` is `null`
-    user = await xata.db.clients.create({
-      id: nanoid(),
-      username: session?.user?.email as string,
-    });
-  }
-
   await xata.db.purchase.create({
     book,
+    client: session?.userId,
   });
 };
 

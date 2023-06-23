@@ -1,0 +1,41 @@
+{
+  "tables": [
+    {
+      "name": "books",
+      "columns": [
+        {
+          "name": "title",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "clients",
+      "columns": [
+        {
+          "name": "username",
+          "type": "email"
+        }
+      ]
+    },
+    {
+      "name": "purchase",
+      "columns": [
+        {
+          "name": "client",
+          "type": "link",
+          "link": {
+            "table": "clients"
+          }
+        },
+        {
+          "name": "book",
+          "type": "link",
+          "link": {
+            "table": "books"
+          }
+        }
+      ]
+    }
+  ]
+}

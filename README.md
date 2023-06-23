@@ -1,30 +1,22 @@
-# SolidStart + AuthJS
+# SolidStart + AuthJS + Xata
 
-Everything you need to build an [AuthJS](https://authjs.dev/) authenticated Solid project, powered by [`solid-start`](https://start.solidjs.com);
+This app is a proof of concept bookstore.
+
+- Solid-Start as the app's framework
+- Auth.js to handle Authorization
+- Xata to persist data.
 
 ## Creating a project
 
-```bash
-# create a new project in the current directory
-npm init solid@latest
+Link to a Xata database. Push the schema as `schema-template.json`.
+There are 3 tables:
 
-# create a new project in my-app
-npm init solid@latest my-app
-```
+- **clients**: a table of every user's email **who have made a purchase**
+- **books**: all books that are for sale
+- **purchases**: is a junction table, it stores the `id` of each `client` and a the `id` of the purchased `book`.
 
 ## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
-
-## Building
-
-Solid apps are built with _adapters_, which optimise your project for deployment to different environments.
-
-By default, `npm run build` will generate a Node app that you can run with `npm start`. To use a different adapter, add it to the `devDependencies` in `package.json` and specify in your `vite.config.js`.
+pnpm dev
+```

@@ -1,0 +1,6 @@
+{
+  "databaseURL": "https://demos-urucbe.eu-west-1.xata.sh/db/bookstore-solidjs",
+  "codegen": {
+    "output": "src/xata.codegen.ts"
+  }
+}
